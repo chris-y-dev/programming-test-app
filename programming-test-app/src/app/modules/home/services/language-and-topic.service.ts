@@ -1,4 +1,9 @@
-import { Topic, Question, Language } from './../models/language';
+import {
+  Topic,
+  Question,
+  Language,
+  TopicDifficulty,
+} from './../models/language';
 import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
@@ -10,7 +15,7 @@ export class LanguageAndTopicService {
   constructor() {}
 
   js: Language = new Language('JavaScript', [
-    new Topic('Array basics', [
+    new Topic('Array basics', TopicDifficulty.Beginner, [
       new Question(
         'js01',
         'Did she say hello?',
@@ -22,10 +27,22 @@ export class LanguageAndTopicService {
         'Write simple function to minus 2 for all even numbers only'
       ),
     ]),
+    new Topic('String manipulation', TopicDifficulty.Beginner, [
+      new Question(
+        'js03',
+        'Camel Casing',
+        'Write simple function to camel case the entire sentence'
+      ),
+      new Question(
+        'js04',
+        'Minus 2 if Even',
+        'Write simple function to minus 2 for all even numbers only'
+      ),
+    ]),
   ]);
 
   csharp: Language = new Language('C#', [
-    new Topic('Array basics', [
+    new Topic('Array basics', TopicDifficulty.Beginner, [
       new Question(
         'cs01',
         'Did she say hello?',

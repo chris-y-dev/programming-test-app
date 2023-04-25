@@ -1,0 +1,12 @@
+.topic-button{
+    background-color: rgb(161, 248, 237);
+    width: 110px;
+    padding: 0.6rem;
+    border-radius: 5px;
+    border: none;
+    margin: auto;
+
+    &:hover{
+        background-color: rgb(122, 222, 187);
+    }
+}

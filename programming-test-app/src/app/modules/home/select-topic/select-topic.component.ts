@@ -12,4 +12,10 @@ export class SelectTopicComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  // TODO: Use pipe + filter to sort through topics
+
+  handleTopicSelect(event: any) {
+    console.log(event);
+  }
 }

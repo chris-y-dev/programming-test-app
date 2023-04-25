@@ -10,12 +10,20 @@ export class Language {
 
 export class Topic {
   name: string;
+  difficulty: TopicDifficulty;
   questions: Question[];
 
-  constructor(name: string, questions: Question[]) {
+  constructor(name: string, difficulty: number, questions: Question[]) {
     this.name = name;
+    this.difficulty = difficulty;
     this.questions = questions;
   }
+}
+
+export enum TopicDifficulty {
+  Beginner = 1,
+  Intermediate = 2,
+  Advanced = 3,
 }
 
 export class Question {
