@@ -3,7 +3,7 @@ import {
   Question,
   Language,
   TopicDifficulty,
-} from './../models/language';
+} from '../../shared/models/language';
 import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';

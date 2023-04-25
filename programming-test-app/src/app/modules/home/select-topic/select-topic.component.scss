@@ -6,7 +6,29 @@
     border: none;
     margin: auto;
 
+    
+}
+
+.bg-beginner{
+    background-color: rgb(134, 231, 165);
+
     &:hover{
-        background-color: rgb(122, 222, 187);
+        background-color: rgb(116, 198, 142);
+    }
+}
+
+.bg-intermediate{
+    background-color: rgb(255, 226, 110);
+
+    &:hover{
+        background-color: rgb(251, 215, 96);
+    }
+}
+
+.bg-advanced{
+    background-color: rgb(242, 148, 120);
+
+    &:hover{
+        background-color: rgb(223, 131, 85);
     }
 }

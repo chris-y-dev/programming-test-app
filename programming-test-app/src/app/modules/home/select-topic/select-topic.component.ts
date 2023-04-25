@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Language } from '../models/language';
+import { Language } from '../../shared/models/language';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-select-topic',
@@ -9,7 +10,7 @@ import { Language } from '../models/language';
 export class SelectTopicComponent implements OnInit {
   @Input() selectedLanguage: Language | null = null;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -17,5 +18,6 @@ export class SelectTopicComponent implements OnInit {
 
   handleTopicSelect(event: any) {
     console.log(event);
+    this.router.navigate(['/test']);
   }
 }

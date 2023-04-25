@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Language } from 'src/app/modules/home/models/language';
+import { Language } from 'src/app/modules/shared/models/language';
 
 @Component({
   selector: 'app-home',
