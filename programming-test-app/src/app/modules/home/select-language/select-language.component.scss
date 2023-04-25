@@ -1,0 +1,12 @@
+.language-button{
+    background-color: rgb(214, 250, 238);
+    width: 110px;
+    padding: 0.6rem;
+    border-radius: 5px;
+    border: none;
+    margin: auto;
+
+    &:hover{
+        background-color: rgb(122, 222, 187);
+    }
+}

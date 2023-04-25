@@ -1,0 +1,4 @@
+<!-- Toolbar -->
+<app-select-language *ngIf="selectedLanguage == null" (emitSelectedLanguage)="handleSelectLanguage($event)"></app-select-language>
+
+<app-select-topic *ngIf="selectedLanguage != null" [selectedLanguage]="selectedLanguage"></app-select-topic>

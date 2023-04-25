@@ -1,0 +1,11 @@
+<div>
+    <h1 class="text-center mt-5">Select a language</h1>
+
+    <div class="container my-5">
+        <div class="row gy-4">
+            <div *ngFor="let lang of languageData" class="col-4 text-center">
+                <button class="language-button text-center" role="button" (click)="handleLanguageSelect(lang)">{{lang.name}}</button>
+            </div>
+        </div>
+    </div>
+</div>
