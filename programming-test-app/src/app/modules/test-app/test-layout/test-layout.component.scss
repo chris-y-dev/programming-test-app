@@ -1,0 +1,43 @@
+@import '/node_modules/bootstrap/scss/functions';
+@import '/node_modules/bootstrap/scss/variables';
+@import '/node_modules/bootstrap/scss/mixins';
+
+.test-layout-container{
+    height: calc(100vh - 76px);
+    width: 100%;
+}
+
+.progress{
+    border-radius: 0 !important;
+}
+
+.left-panel {
+    height: 100%;
+    margin: 0;
+    grid-area: left-panel;
+    background-color: #c77676;
+    overflow: auto;
+    display: flex;
+
+    justify-content: center;
+
+    @include media-breakpoint-down(lg) { 
+        height: auto;
+     }
+}
+.right-panel {
+    height: 100%;
+    margin: 0;
+    grid-area: right-panel;
+    background-color: #66c145;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    @include media-breakpoint-down(lg) { 
+        height: auto;
+     }
+}
+
+.ide-container{
+    width: 100% !important;
+}

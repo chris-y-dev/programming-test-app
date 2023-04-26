@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Language } from '../../shared/models/language';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Language, Topic } from '../../shared/models/language';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 })
 export class SelectTopicComponent implements OnInit {
   @Input() selectedLanguage: Language | null = null;
+  @Output() emitSelectedTopic: EventEmitter<Topic> = new EventEmitter();
+
+  selectedTopic: Topic | null = null;
 
   constructor(private router: Router) {}
 
@@ -16,8 +19,10 @@ export class SelectTopicComponent implements OnInit {
 
   // TODO: Use pipe + filter to sort through topics
 
-  handleTopicSelect(event: any) {
-    console.log(event);
-    this.router.navigate(['/test']);
+  handleTopicSelect(topic: Topic) {
+    console.log(topic);
+    this.selectedTopic = topic;
+    // this.router.navigate(['/test']);
+    this.emitSelectedTopic.emit(this.selectedTopic);
   }
 }

@@ -1,0 +1,45 @@
+@import "../../shared/styles/colours.scss";
+
+.instructions-container{
+    width: 60%;
+    min-width: 200px;
+    max-width: 700px;
+    margin: auto;
+}
+
+.difficulty-container{
+    border-radius: 12px;
+    width: 120px;
+    text-align: center;
+    &.bg-beginner{
+        background-color: $color-beginner;
+    }
+
+    &.bg-intermediate{
+        background-color: $color-intermediate;
+    }
+
+    &.bg-advanced{
+        background-color: $color-advanced;
+    }
+}
+
+.mode-button{
+    border: 1px solid grey;
+
+    &.--untimed{
+        border-color: $color-beginner;
+
+        &:hover{
+            background-color: $color-beginner;
+        }
+    }
+
+    &.--timed{
+        border-color: $color-advanced;
+
+        &:hover{
+            background-color: $color-advanced;
+        }
+    }
+}

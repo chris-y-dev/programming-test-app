@@ -9,11 +9,18 @@ export class Language {
 }
 
 export class Topic {
+  id: string;
   name: string;
   difficulty: TopicDifficulty;
   questions: Question[];
 
-  constructor(name: string, difficulty: number, questions: Question[]) {
+  constructor(
+    id: string,
+    name: string,
+    difficulty: number,
+    questions: Question[]
+  ) {
+    this.id = id;
     this.name = name;
     this.difficulty = difficulty;
     this.questions = questions;
@@ -30,10 +37,17 @@ export class Question {
   id: string;
   title: string;
   description: string;
+  timeLimit: number;
 
-  constructor(id: string, title: string, description: string) {
+  constructor(
+    id: string,
+    title: string,
+    description: string,
+    timeLimit: number
+  ) {
     this.id = id;
     this.title = title;
     this.description = description;
+    this.timeLimit = timeLimit;
   }
 }

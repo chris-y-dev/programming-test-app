@@ -1,0 +1,19 @@
+<div>
+    <div class="my-5 d-flex flex-column align-items-center">
+        <h1 class="text-center my-3">{{selectedTopic?.name}}</h1>
+        <span [ngClass]="getDifficultyClass()" class="difficulty-container p-1">{{getDifficultyText()}}</span>
+    </div>
+    <div class="instructions-container">
+        Choose your programming language and level.
+Solve 10 programming challenges in the code editor provided.
+Click "Submit" to check your code.
+Repeat steps 2 and 3 for all 10 challenges.
+Finish the level and receive feedback on your performance.
+Select a new level or language to continue playing.
+Enjoy learning and experimenting!
+    </div>
+    <div class="container d-flex flex-row justify-content-center my-4">
+        <button class="btn mode-button --untimed mx-4" [value]="'untimed'" (click)="onSelectMode($event)">Start Untimed 😊</button>
+        <button class="btn mode-button --timed mx-4" [value]="'timed'" (click)="onSelectMode($event)">Start Timed ⏳</button>
+    </div>
+</div>

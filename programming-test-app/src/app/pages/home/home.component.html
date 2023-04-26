@@ -1,4 +1,6 @@
 <!-- Toolbar -->
-<app-select-language *ngIf="selectedLanguage == null" (emitSelectedLanguage)="handleSelectLanguage($event)"></app-select-language>
+<app-select-language *ngIf="step == 1" (emitSelectedLanguage)="handleSelectLanguage($event)"></app-select-language>
 
-<app-select-topic *ngIf="selectedLanguage != null" [selectedLanguage]="selectedLanguage"></app-select-topic>
+<app-select-topic *ngIf="step == 2" [selectedLanguage]="selectedLanguage" (emitSelectedTopic)="handleSelectTopic($event)"></app-select-topic>
+
+<app-select-mode *ngIf="step == 3" [selectedTopic]="selectedTopic" (emitSelectedTopic)="handleSelectMode($event)"></app-select-mode>

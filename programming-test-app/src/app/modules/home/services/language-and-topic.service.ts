@@ -15,43 +15,49 @@ export class LanguageAndTopicService {
   constructor() {}
 
   js: Language = new Language('JavaScript', [
-    new Topic('Array basics', TopicDifficulty.Beginner, [
+    new Topic('jst0001', 'Array basics', TopicDifficulty.Beginner, [
       new Question(
         'js01',
         'Did she say hello?',
-        'Write simple function to check if array of texts include Hello'
+        'Write simple function to check if array of texts include Hello',
+        300
       ),
       new Question(
         'js02',
         'Minus 2 if Even',
-        'Write simple function to minus 2 for all even numbers only'
+        'Write simple function to minus 2 for all even numbers only',
+        300
       ),
     ]),
-    new Topic('String manipulation', TopicDifficulty.Beginner, [
+    new Topic('jst0002', 'String manipulation', TopicDifficulty.Beginner, [
       new Question(
         'js03',
         'Camel Casing',
-        'Write simple function to camel case the entire sentence'
+        'Write simple function to camel case the entire sentence',
+        180
       ),
       new Question(
         'js04',
         'Minus 2 if Even',
-        'Write simple function to minus 2 for all even numbers only'
+        'Write simple function to minus 2 for all even numbers only',
+        180
       ),
     ]),
   ]);
 
   csharp: Language = new Language('C#', [
-    new Topic('Array basics', TopicDifficulty.Beginner, [
+    new Topic('cst0001', 'Array basics', TopicDifficulty.Beginner, [
       new Question(
         'cs01',
         'Did she say hello?',
-        'Write simple function to check if array of texts include Hello'
+        'Write simple function to check if array of texts include Hello',
+        300
       ),
       new Question(
         'cs02',
         'Minus 2 if Even',
-        'Write simple function to minus 2 for all even numbers only'
+        'Write simple function to minus 2 for all even numbers only',
+        300
       ),
     ]),
   ]);

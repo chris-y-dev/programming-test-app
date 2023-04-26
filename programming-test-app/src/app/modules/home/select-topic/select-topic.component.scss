@@ -1,16 +1,16 @@
+@import "../../shared/styles/colours.scss";
+
 .topic-button{
     background-color: rgb(161, 248, 237);
     width: 110px;
     padding: 0.6rem;
     border-radius: 5px;
     border: none;
-    margin: auto;
-
-    
+    margin: auto;  
 }
 
 .bg-beginner{
-    background-color: rgb(134, 231, 165);
+    background-color: $color-beginner;
 
     &:hover{
         background-color: rgb(116, 198, 142);
@@ -18,7 +18,7 @@
 }
 
 .bg-intermediate{
-    background-color: rgb(255, 226, 110);
+    background-color: $color-intermediate;
 
     &:hover{
         background-color: rgb(251, 215, 96);
@@ -26,7 +26,7 @@
 }
 
 .bg-advanced{
-    background-color: rgb(242, 148, 120);
+    background-color: $color-advanced;
 
     &:hover{
         background-color: rgb(223, 131, 85);

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StartLayoutComponent } from './start-layout.component';
+import { SelectModeComponent } from './select-mode.component';
 
-describe('StartLayoutComponent', () => {
-  let component: StartLayoutComponent;
-  let fixture: ComponentFixture<StartLayoutComponent>;
+describe('SelectModeComponent', () => {
+  let component: SelectModeComponent;
+  let fixture: ComponentFixture<SelectModeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StartLayoutComponent ]
+      declarations: [ SelectModeComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(StartLayoutComponent);
+    fixture = TestBed.createComponent(SelectModeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
