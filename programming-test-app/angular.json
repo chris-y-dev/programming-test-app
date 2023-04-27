@@ -25,7 +25,10 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
-            "scripts": []
+            "scripts": [
+              "src/app/modules/test-app/scripts/sockjs.js",
+              "src/app/modules/test-app/scripts/webstomp.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -93,7 +96,9 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/app/modules/test-app/scripts/sockjs.js",
+              "src/app/modules/test-app/scripts/webstomp.js"
             ]
           }
         }

@@ -1,9 +1,11 @@
 <div class="ide-container">
 
-    <div data-pym-src='https://www.jdoodle.com/plugin' data-language="nodejs"
-    data-version-index="0" data-libs="mavenlib1, mavenlib2">
-    Starting code
-    </div>
+    <textarea rows="5" id="ide" (keypress)="onInput($event)"></textarea>
+    <p id="result">x</p>
+</div>
+<div class="buttons-container d-flex flex-row justify-content-end">
+    <button class="btn mx-3 ide-button --test" (click)="handleTest()">Test</button>
+    <button class="btn mx-3 ide-button --next">Next</button>
 </div>
 
  

@@ -1,7 +1,30 @@
 .ide-container{
     width: 100%;
 
-    .textarea{
+    textarea{
         min-height: 300px !important;
+        max-height: 600px;
+        width: 100%;
+        border-radius: 6px;
+        overflow: auto;
+        background-color: rgb(37, 37, 37);
+        color: white;
+        padding: 1rem;
+    }  
+}
+
+.buttons-container{
+    width: 100%;
+
+    .ide-button{
+        width: 100px;
+
+        &.--test{
+            background-color: white;
+        }
+
+        &.--next{
+            background-color: rgb(44, 234, 91);
+        }
     }
 }
