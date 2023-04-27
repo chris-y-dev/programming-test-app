@@ -1,11 +1,11 @@
 <div class="ide-container">
 
     <textarea rows="5" id="ide" (keypress)="onInput($event)"></textarea>
-    <p id="result">x</p>
+    <p id="result"></p>
 </div>
 <div class="buttons-container d-flex flex-row justify-content-end">
     <button class="btn mx-3 ide-button --test" (click)="handleTest()">Test</button>
-    <button class="btn mx-3 ide-button --next">Next</button>
+    <button class="btn mx-3 ide-button --next" (click)="handleNext()">Next</button>
 </div>
 
  

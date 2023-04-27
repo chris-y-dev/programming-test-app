@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { RxStomp } from '@stomp/rx-stomp';
 declare var SockJS: any;
 declare var webstomp: any;
@@ -10,7 +10,8 @@ declare var webstomp: any;
 })
 export class IdePanelComponent implements OnInit {
   // rxStomp = new RxStomp();
-
+  @Input() currentProgress: number = 1;
+  @Output() emitNextQuestion: EventEmitter<number> = new EventEmitter();
   socketClient: any;
 
   codeInput: string = '';
@@ -128,5 +129,15 @@ export class IdePanelComponent implements OnInit {
         message_type: 'input',
       });
     }
+  }
+
+  handleNext() {
+    var textArea = document.getElementById('ide') as HTMLInputElement;
+    if (textArea != null) {
+      textArea.value = '';
+    }
+
+    this.currentProgress++;
+    this.emitNextQuestion.emit(this.currentProgress);
   }
 }

@@ -1,27 +1,27 @@
-<div>
-    <h1 class="text-center mt-5">Select a language</h1>
+<div class="topic-container pt-5">
+    <h1 class="text-center">Select a Topic</h1>
 
-    <div>
-        <h2 class="d-inline-block ms-4">Beginner</h2>
+    <div class="container mt-5">
+        <h3 class="d-inline-block ms-4">Beginner</h3>
         <div class="container my-5">
             <div class="row gy-4">
-                <div *ngFor="let topic of selectedLanguage?.topics" class="col-4 text-center">
+                <div *ngFor="let topic of selectedLanguage?.topics" class="col-3 text-center">
                     <button class="topic-button bg-beginner text-center" role="button" (click)="handleTopicSelect(topic)">{{topic.name}}</button>
                 </div>
             </div>
         </div>
-        <h2 class="d-inline-block ms-4">Intermediate</h2>
+        <h3 class="d-inline-block ms-4">Intermediate</h3>
         <div class="container my-5">
             <div class="row gy-4">
-                <div *ngFor="let topic of selectedLanguage?.topics" class="col-4 text-center">
+                <div *ngFor="let topic of selectedLanguage?.topics" class="col-3 text-center">
                     <button class="topic-button bg-intermediate text-center" role="button" (click)="handleTopicSelect(topic)">{{topic.name}}</button>
                 </div>
             </div>
         </div>
-        <h2 class="d-inline-block ms-4">Advanced</h2>
+        <h3 class="d-inline-block ms-4">Advanced</h3>
         <div class="container my-5">
             <div class="row gy-4">
-                <div *ngFor="let topic of selectedLanguage?.topics" class="col-4 text-center">
+                <div *ngFor="let topic of selectedLanguage?.topics" class="col-3 text-center">
                     <button class="topic-button bg-advanced text-center" role="button" (click)="handleTopicSelect(topic)">{{topic.name}}</button>
                 </div>
             </div>

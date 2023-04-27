@@ -1,6 +1,7 @@
 @import '/node_modules/bootstrap/scss/functions';
 @import '/node_modules/bootstrap/scss/variables';
 @import '/node_modules/bootstrap/scss/mixins';
+@import "../../shared/styles/colours.scss";
 
 .test-layout-container{
     height: calc(100vh - 76px);
@@ -15,7 +16,7 @@
     height: 100%;
     margin: 0;
     grid-area: left-panel;
-    background-color: #d2d2d2;
+    background-color: $app-bg-light-grey;
     overflow: auto;
     display: flex;
 
@@ -29,7 +30,7 @@
     height: 100%;
     margin: 0;
     grid-area: right-panel;
-    background-color: #858585;
+    background-color: $app-bg-dark-grey;
     overflow: auto;
     display: flex;
     justify-content: center;

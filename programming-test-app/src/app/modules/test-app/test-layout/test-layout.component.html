@@ -1,14 +1,18 @@
-<div class="test-layout-container">
-    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-        <div class="progress-bar" style="width: 100%">Question 1/10</div>
+<div class="test-layout-container" *ngIf="currentQuestion != null">
+    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped bg-info progress-bar-animated" style="width: {{progressPercentage.toString() + '%'}}">Question {{currentProgress}}/{{totalQuestions}} </div>
       </div>
     <div class="row h-100 gx-0">
 
         <div class="left-panel col-md-12 col-lg-5  pt-4 pb-3 px-3">
-            <app-problem-panel></app-problem-panel>
+            <app-problem-panel [currentQuestion]="currentQuestion"></app-problem-panel>
         </div>
         <div class="right-panel col-md-12 col-lg-7 pt-4 pb-3 px-3">
-            <app-ide-panel class="ide-container"></app-ide-panel>
+            <app-ide-panel class="ide-container" [currentProgress]="currentProgress" (emitNextQuestion)="handleNextQuestion($event)"></app-ide-panel>
         </div>
     </div>
+</div>
+
+<div class="test-layout-container" *ngIf="currentQuestion == null">
+    Loading...
 </div>

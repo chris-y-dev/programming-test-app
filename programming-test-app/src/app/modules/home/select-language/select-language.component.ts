@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LanguageAndTopicService } from '../services/language-and-topic.service';
+import { LanguageAndTopicService } from '../../shared/services/language-and-topic.service';
 import { Language } from '../../shared/models/language';
 
 @Component({
