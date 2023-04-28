@@ -1,4 +1,4 @@
-import { Topic, Question, Language, TopicDifficulty } from '../models/language';
+import { Topic, Question, Language, TopicDifficulty } from '../models/models';
 import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LanguageAndTopicService } from '../../shared/services/language-and-topic.service';
-import { Question, Topic } from '../../shared/models/language';
+import { Question, Topic } from '../../shared/models/models';
 
 @Component({
   selector: 'app-test-layout',
@@ -13,6 +13,8 @@ export class TestLayoutComponent implements OnInit {
     private router: Router,
     private ltService: LanguageAndTopicService
   ) {}
+
+  @Input() currentToken: string | null = null;
 
   selectedTopic: Topic | null = null;
   randomQuestions: Question[] = [];

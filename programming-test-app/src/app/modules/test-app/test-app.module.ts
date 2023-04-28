@@ -5,6 +5,7 @@ import { IdePanelComponent } from './ide-panel/ide-panel.component';
 import { TestLayoutComponent } from './test-layout/test-layout.component';
 import { TestAppComponent } from './test-app/test-app.component';
 import { ResultPageComponent } from './result-page/result-page.component';
+import { TestCasePanelComponent } from './test-case-panel/test-case-panel.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { ResultPageComponent } from './result-page/result-page.component';
     IdePanelComponent,
     TestLayoutComponent,
     ResultPageComponent,
+    TestCasePanelComponent,
   ],
   imports: [CommonModule],
 })

@@ -8,7 +8,7 @@
             <app-problem-panel [currentQuestion]="currentQuestion"></app-problem-panel>
         </div>
         <div class="right-panel col-md-12 col-lg-7 pt-4 pb-3 px-3">
-            <app-ide-panel class="ide-container" [currentProgress]="currentProgress" (emitNextQuestion)="handleNextQuestion($event)"></app-ide-panel>
+            <app-ide-panel [currentToken]="currentToken" class="ide-container" [currentProgress]="currentProgress" (emitNextQuestion)="handleNextQuestion($event)"></app-ide-panel>
         </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Language, Topic } from 'src/app/modules/shared/models/language';
+import { Language, Topic } from 'src/app/modules/shared/models/models';
 
 @Component({
   selector: 'app-home',

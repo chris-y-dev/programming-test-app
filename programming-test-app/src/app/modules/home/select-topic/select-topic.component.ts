@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Language, Topic } from '../../shared/models/language';
+import { Language, Topic } from '../../shared/models/models';
 import { Router } from '@angular/router';
 
 @Component({

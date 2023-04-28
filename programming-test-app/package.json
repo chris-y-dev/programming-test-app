@@ -23,6 +23,7 @@
     "@stomp/rx-stomp": "^2.0.0",
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.10.4",
+    "indent-textarea": "^3.0.0",
     "rxjs": "~7.5.0",
     "sockjs-client": "^1.6.1",
     "tslib": "^2.3.0",

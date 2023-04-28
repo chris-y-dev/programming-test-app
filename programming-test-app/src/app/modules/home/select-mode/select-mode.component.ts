@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Topic } from '../../shared/models/language';
+import { Topic } from '../../shared/models/models';
 import { Router } from '@angular/router';
 import { UtilsService } from '../../shared/utils/utils.service';
 

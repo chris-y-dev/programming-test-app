@@ -1,5 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { RxStomp } from '@stomp/rx-stomp';
+import { enableTabToIndent } from 'indent-textarea';
+import { JdoodleService } from '../../shared/services/jdoodle.service';
+import { Observable } from 'rxjs';
 declare var SockJS: any;
 declare var webstomp: any;
 
@@ -10,11 +13,13 @@ declare var webstomp: any;
 })
 export class IdePanelComponent implements OnInit {
   // rxStomp = new RxStomp();
+  @Input() currentToken: string | null = null;
   @Input() currentProgress: number = 1;
   @Output() emitNextQuestion: EventEmitter<number> = new EventEmitter();
   socketClient: any;
-
   codeInput: string = '';
+
+  testResponse$: Promise<any> | null = null;
 
   ngOnInit(): void {
     this.loadScript(
@@ -34,21 +39,21 @@ export class IdePanelComponent implements OnInit {
       this.onWsConnection,
       this.onWsConnectionFailed
     );
+
+    const textarea = document.querySelector('textarea');
+    enableTabToIndent(textarea!);
   }
-  constructor() {}
+  constructor(private jdoodleService: JdoodleService) {}
 
   onWsConnection() {
-    debugger;
     console.log('connection succeeded');
+    let wsNextId = 0;
 
     this.socketClient.subscribe('/user/queue/execute-i', (message: any) => {
       let msgId = message.headers['message-id'];
       let msgSeq = parseInt(msgId.substring(msgId.lastIndexOf('-') + 1));
-      let wsNextId = 0;
 
       let statusCode = parseInt(message.headers.statusCode);
-
-      console.log('STATUS', statusCode);
 
       if (statusCode === 201) {
         wsNextId = msgSeq + 1;
@@ -79,15 +84,25 @@ export class IdePanelComponent implements OnInit {
         //Unauthorised request
         console.log('Unauthorised request');
       } else {
-        var resultElement = document.getElementById('result');
-
-        if (resultElement != null) {
-          var txt = resultElement.innerHTML;
-          document.getElementById('result')!.innerHTML = txt + message.body;
-        }
+        var txt = (document.getElementById('result') as HTMLInputElement).value;
+        (document.getElementById('result') as HTMLInputElement).value =
+          txt + message.body;
       }
 
       wsNextId = msgSeq + 1;
+    });
+
+    let script = `console.log("HELLO")`;
+
+    let data = JSON.stringify({
+      script: script,
+      language: 'nodejs',
+      versionIndex: 0,
+    });
+
+    this.socketClient.send('/app/execute-ws-api-token', data, {
+      message_type: 'execute',
+      token: this.currentToken,
     });
   }
 
@@ -112,28 +127,33 @@ export class IdePanelComponent implements OnInit {
     console.log('Key', event.key);
 
     let key = event.key;
+    console.log(key);
     if (event.key === 'Enter') {
       key = '\n';
     }
-    this.codeInput += key;
-
-    console.log('Dispaly', this.codeInput);
+    this.codeInput = `${event.target.value + key}`;
 
     this.socketClient.send('/app/execute-ws-api-token', key, {
       message_type: 'input',
     });
+
+    console.log(this.codeInput);
   }
 
   handleTest() {
-    var textArea = document.getElementById('ide') as HTMLInputElement;
+    console.log(this.codeInput);
 
-    if (textArea != null) {
-      console.log(textArea.value);
+    // this.socketClient.send('/app/execute-ws-api-token', this.codeInput, {
+    //   message_type: 'input',
+    // });
 
-      this.socketClient.send('/app/execute-ws-api-token', textArea.value, {
-        message_type: 'input',
+    this.jdoodleService
+      .postScriptForExecution(this.codeInput)
+      .subscribe((res) => {
+        console.log(res);
+        console.log(res.output);
+        this.testResponse$ = res.output;
       });
-    }
   }
 
   handleNext() {
@@ -141,6 +161,8 @@ export class IdePanelComponent implements OnInit {
     if (textArea != null) {
       textArea.value = '';
     }
+
+    this.testResponse$ = null;
 
     this.currentProgress++;
     this.emitNextQuestion.emit(this.currentProgress);

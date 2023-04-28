@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JdoodleService } from '../../shared/services/jdoodle.service';
 
 @Component({
   selector: 'app-test-app',
@@ -7,7 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./test-app.component.scss'],
 })
 export class TestAppComponent implements OnInit {
-  constructor(private router: Router) {}
+  currentToken: any = undefined;
 
-  ngOnInit(): void {}
+  constructor(private router: Router, private jdoodleService: JdoodleService) {}
+
+  ngOnInit(): void {
+    // this.jdoodleService.getToken().subscribe((token) => {
+    //   this.currentToken = token;
+    //   console.log(this.currentToken);
+    // });
+  }
 }

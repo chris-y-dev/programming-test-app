@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Question } from '../../shared/models/language';
+import { Question } from '../../shared/models/models';
 
 @Component({
   selector: 'app-problem-panel',
