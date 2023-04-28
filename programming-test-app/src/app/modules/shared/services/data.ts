@@ -131,23 +131,25 @@ const q20: Question = new Question(
   180
 );
 
-const topic1 = new Topic('jst0001', 'String basics', TopicDifficulty.Beginner, [
-  q1,
-  q2,
-  q3,
-  q4,
-  q5,
-  q6,
-  q7,
-  q8,
-  q9,
-  q10,
-]);
+const topic1 = new Topic(
+  'jst0001',
+  'String basics',
+  TopicDifficulty.Beginner,
+  [
+    'In this quiz, you will be tested on your knowledge of manipulating strings in JavaScript. String manipulation is an essential skill for any JavaScript developer, as it involves working with text data to perform various operations like concatenation, splitting, slicing, and more.',
+    "By the end of this quiz, you should have a solid understanding of how to work with strings in JavaScript, and be able to apply that knowledge to real-world programming tasks.So get ready to put your JavaScript skills to the test, and let's get started!",
+  ],
+  [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10]
+);
 
 const topic2 = new Topic(
   'jst0002',
   'Array manipulation',
   TopicDifficulty.Beginner,
+  [
+    ' In this quiz, you will be tested on your knowledge of manipulating arrays in JavaScript. Array manipulation is a fundamental skill for any JavaScript developer, as it involves working with collections of data to perform various operations like sorting, filtering, mapping, and more.',
+    'By the end of this quiz, you should have a solid understanding of how to work with arrays in JavaScript, and be able to apply that knowledge to real-world programming tasks.',
+  ],
   [q11, q12, q13, q14, q15, q16, q17, q18, q19, q20]
 );
 
@@ -183,12 +185,18 @@ export const allLanguages = [js];
 //C# Data
 
 export const csharp: Language = new Language('C#', [
-  new Topic('cst0001', 'Array basics', TopicDifficulty.Beginner, [
-    new Question(
-      'cs02',
-      'Minus 2 if Even',
-      'Write simple function to minus 2 for all even numbers only',
-      300
-    ),
-  ]),
+  new Topic(
+    'cst0001',
+    'Array basics',
+    TopicDifficulty.Beginner,
+    [],
+    [
+      new Question(
+        'cs02',
+        'Minus 2 if Even',
+        'Write simple function to minus 2 for all even numbers only',
+        300
+      ),
+    ]
+  ),
 ]);

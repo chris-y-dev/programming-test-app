@@ -31,7 +31,6 @@ export class TestLayoutComponent implements OnInit {
       .then((data) =>
         data.subscribe((topic) => {
           this.selectedTopic = topic;
-          console.log(topic);
         })
       )
       .then(() => this.getFiveRandomQuestions())
@@ -66,6 +65,6 @@ export class TestLayoutComponent implements OnInit {
       }
     }
 
-    console.log(this.randomQuestions);
+    // console.log(this.randomQuestions);
   }
 }

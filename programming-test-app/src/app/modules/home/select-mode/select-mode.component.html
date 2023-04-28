@@ -1,29 +1,24 @@
 <div class="mode-container pt-5">
     <div class="d-flex flex-column align-items-center">
-        <h1 class="text-center my-3">{{selectedTopic?.name}}</h1>
+        <h1 class="text-center mb-3">{{selectedTopic?.name}}</h1>
         <span [ngClass]="getDifficultyClass(selectedTopic?.difficulty)" class="difficulty-container p-1">{{getDifficultyText(selectedTopic?.difficulty)}}</span>
     </div>
-    <div class="instructions-container mt-5">
+    <div class="instructions-container mt-4">
 
         <h4>Topic Details</h4>
-        <div>Choose your programming language and level.
-            Solve 10 programming challenges in the code editor provided.
-            Click "Submit" to check your code.
-            Repeat steps 2 and 3 for all 10 challenges.
-            Finish the level and receive feedback on your performance.
-            Select a new level or language to continue playing.
-            Enjoy learning and experimenting!</div>
+        <p *ngFor="let desc of selectedTopic?.description">{{desc}}</p>
 
         <h4 class="mt-5">Instructions</h4>
         <div>
-
-            Choose your programming language and level.
-            Solve 10 programming challenges in the code editor provided.
-            Click "Submit" to check your code.
-            Repeat steps 2 and 3 for all 10 challenges.
-            Finish the level and receive feedback on your performance.
-            Select a new level or language to continue playing.
-            Enjoy learning and experimenting!
+            <ul>
+                <li>5 Random questions will be provided.</li>
+                <li>Click "Test" to check your code.</li>
+                <li>Click "Next" to move on to the next question. You are NOT able to return to the previous question.</li>
+                <li>If "Timed", you will no longer be able to edit your code once the time is up. You must then click "Next" to proceed.</li>
+                <li>Finish all questions to receive results agaist test cases.</li>
+                <li>Select a new topic or language to continue playing.</li>
+                <li>Enjoy learning and experimenting!</li>
+            </ul>            
         </div>
     </div>
     <div class="container d-flex flex-row justify-content-center mt-5">

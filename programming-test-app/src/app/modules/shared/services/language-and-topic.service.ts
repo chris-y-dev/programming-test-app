@@ -28,7 +28,6 @@ export class LanguageAndTopicService {
     var foundTopic = this.allTopics.find((t) => t.id == id);
 
     if (foundTopic != undefined) {
-      console.log(foundTopic);
       return of(foundTopic);
     } else {
       return of(null);

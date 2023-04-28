@@ -12,17 +12,20 @@ export class Topic {
   id: string;
   name: string;
   difficulty: TopicDifficulty;
+  description: string[];
   questions: Question[];
 
   constructor(
     id: string,
     name: string,
     difficulty: number,
+    description: string[],
     questions: Question[]
   ) {
     this.id = id;
     this.name = name;
     this.difficulty = difficulty;
+    this.description = description;
     this.questions = questions;
   }
 }

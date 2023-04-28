@@ -17,6 +17,10 @@ export class IdePanelComponent implements OnInit {
   codeInput: string = '';
 
   ngOnInit(): void {
+    this.loadScript(
+      'https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js'
+    );
+
     this.socketClient = webstomp.over(
       new SockJS('https://api.jdoodle.com/v1/stomp'),
       {
@@ -34,6 +38,7 @@ export class IdePanelComponent implements OnInit {
   constructor() {}
 
   onWsConnection() {
+    debugger;
     console.log('connection succeeded');
 
     this.socketClient.subscribe('/user/queue/execute-i', (message: any) => {

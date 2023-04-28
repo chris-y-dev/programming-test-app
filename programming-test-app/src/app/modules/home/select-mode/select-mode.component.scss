@@ -2,12 +2,13 @@
 
 .mode-container{
     background-color: $app-bg-light-grey;
+    height: auto;
 }
 
 .instructions-container{
     width: 60%;
     min-width: 200px;
-    max-width: 700px;
+    max-width: 800px;
     margin: auto;
 }
 
