@@ -7,7 +7,7 @@ import { ResultPageComponent } from './modules/test-app/result-page/result-page.
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'test/:mode/:topicId', component: TestAppComponent },
-  { path: 'result/:resultsId', component: ResultPageComponent },
+  // { path: 'result/:resultsId', component: ResultPageComponent },
 ];
 
 @NgModule({

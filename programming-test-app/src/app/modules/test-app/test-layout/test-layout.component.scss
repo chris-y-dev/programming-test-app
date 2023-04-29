@@ -4,12 +4,16 @@
 @import "../../shared/styles/colours.scss";
 
 .test-layout-container{
-    height: calc(100vh - 76px);
+    height: 100%;
     width: 100%;
 }
 
 .progress{
     border-radius: 0 !important;
+}
+
+.jdoodle-orange{
+    background-color: $jdoodle-theme-orange;
 }
 
 .left-panel {

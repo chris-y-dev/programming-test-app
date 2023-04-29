@@ -1,29 +1,33 @@
-<div class="results-container d-flex flex-column align-items-center pt-5">
+<div class="results-container d-flex flex-column align-items-center p-3 pt-5">
     <div class="mb-5">
 
         <h1 class="text-center">Results</h1>
         <div class="d-flex flex-row justify-content-center align-items-center mt-4">
-            <h3 class="d-inline-block text-center mx-3">Topic Name</h3>
-            <div class="difficulty-container mx-2" [ngClass]="getDifficultyClass(1)">{{getDifficultyText(1)}}</div>
-            <div class="mx-2 mode-container" [ngClass]="getModeClass('Timed')">Timed</div>
+            <h2 class="d-inline-block text-center mx-3">Topic Name</h2>
+            <div class="pill-container mx-2" [ngClass]="getDifficultyClass(1)">{{getDifficultyText(1)}}</div>
+            <div class="mx-2 pill-container" [ngClass]="getModeClass('Timed')">Timed</div>
         </div>
     </div>
-    <div class="container">
-
-        <div class="row gy-3">
+    <div class="rows-container">
+        <div class="row mb-5">
+            <h3 class="col-4 text-center">Questions</h3>
+            <h3 class="col-8 text-center">Test cases</h3>
+        </div>
+ 
+        <div class="row mb-5" *ngFor="let response of executionResponses$; let index=index">
             <div class="col-4">
-                <div class="d-flex flex-column align-items-start">
-                    <h3>Question 1</h3>
-                    <span>Task title</span>
+                <div class="d-flex flex-column align-items-start justify-content-center">
+                    <h4 class="d-inline-block">{{index+1}}. {{response.question}}</h4>
                 </div>
             </div>
             <div class="col-8">
+                
+               
                 <div class="d-flex flex-row justify-content-around align-items-center">
-                    <div>Test case 1</div>
-                    <div>Test case 2</div>
-                    <div>Test case 3</div>
-                    <div>Test case 4</div>
-                    <div>Test case 5</div>
+                    <div *ngFor="let testResult of response.passTestCase" [ngClass]="testResult==true? 'pass-container' : 'fail-container'" >
+                        <i *ngIf="testResult==true" class="bi bi-check-circle-fill"></i>
+                        <i *ngIf="testResult==false"class="bi bi-x-circle-fill"></i>
+                    </div>
                 </div>
             </div>
         </div>

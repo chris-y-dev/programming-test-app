@@ -3,7 +3,7 @@
 
     <div class="container mt-5 max-width">
         <h3 class="d-inline-block ms-4">Beginner</h3>
-        <div class="container my-5">
+        <div class="container mt-3 mb-5">
             <div class="row gy-4">
                 <div *ngFor="let topic of selectedLanguage?.topics" class="col-3 text-center">
                     <button class="topic-button bg-beginner text-center" role="button" (click)="handleTopicSelect(topic)">{{topic.name}}</button>
@@ -11,7 +11,7 @@
             </div>
         </div>
         <h3 class="d-inline-block ms-4">Intermediate</h3>
-        <div class="container my-5">
+        <div class="container mt-3 mb-5">
             <div class="row gy-4">
                 <div *ngFor="let topic of selectedLanguage?.topics" class="col-3 text-center">
                     <button class="topic-button bg-intermediate text-center" role="button" (click)="handleTopicSelect(topic)">{{topic.name}}</button>
@@ -19,7 +19,7 @@
             </div>
         </div>
         <h3 class="d-inline-block ms-4">Advanced</h3>
-        <div class="container my-5">
+        <div class="container mt-3 mb-5">
             <div class="row gy-4">
                 <div *ngFor="let topic of selectedLanguage?.topics" class="col-3 text-center">
                     <button class="topic-button bg-advanced text-center" role="button" (click)="handleTopicSelect(topic)">{{topic.name}}</button>

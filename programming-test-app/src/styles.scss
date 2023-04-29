@@ -4,8 +4,10 @@
 html, body{
     margin: 0;
     padding: 0;
+    height: 100%;
     background-color: $app-bg-light-grey
   }
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@import "/node_modules/bootstrap-icons"
 
