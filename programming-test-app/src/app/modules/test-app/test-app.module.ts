@@ -6,6 +6,7 @@ import { TestLayoutComponent } from './test-layout/test-layout.component';
 import { TestAppComponent } from './test-app/test-app.component';
 import { ResultPageComponent } from './result-page/result-page.component';
 import { TestCasePanelComponent } from './test-case-panel/test-case-panel.component';
+import { TimerComponent } from './timer/timer.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { TestCasePanelComponent } from './test-case-panel/test-case-panel.compon
     TestLayoutComponent,
     ResultPageComponent,
     TestCasePanelComponent,
+    TimerComponent,
   ],
   imports: [CommonModule],
 })

@@ -1,0 +1,14 @@
+<div class="timer">
+    <!-- <div class="d-inline-block"></div> -->
+    <div *ngIf="timesUp == false && !(minutes=='' && seconds=='')" [ngClass]="oneMinuteLeft? 'alert-font' : 'time-font'" class="timer-width d-inline-block ms-4">
+        {{minutes}}:{{seconds}}
+    </div>
+
+    <div *ngIf="timesUp == true" class="timer-width d-inline-block ms-4 alert-font">
+        Time's Up
+    </div>
+
+    <div *ngIf="targetTime == null || (minutes=='' && seconds=='')" class="timer-width d-inline-block ms-4">
+        Loading...
+    </div>
+</div>

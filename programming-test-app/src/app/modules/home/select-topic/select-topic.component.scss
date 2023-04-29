@@ -4,6 +4,7 @@
 
 .topic-container{
     background-color: $app-bg-light-grey;
+    height: 100%;
 
     .max-width{
         max-width: $home-max-width;
@@ -12,8 +13,8 @@
 
 .topic-button{
     
-    width: 110px;
-    padding: 0.6rem;
+    width: 160px;
+    padding: 0.8rem 0.6rem;
     border-radius: 8px;
     border: none;
     margin: auto;  

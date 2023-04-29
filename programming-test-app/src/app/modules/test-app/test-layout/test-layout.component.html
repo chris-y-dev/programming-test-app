@@ -1,6 +1,6 @@
 <div class="test-layout-container" *ngIf="currentQuestion != null">
     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100">
-        <div class="progress-bar progress-bar-striped bg-info progress-bar-animated" style="width: {{progressPercentage.toString() + '%'}}">Question {{currentProgress}}/{{totalQuestions}} </div>
+        <div class="progress-bar progress-bar-striped progress-bar-animated jdoodle-orange" style="width: {{progressPercentage.toString() + '%'}}">Question {{currentProgress}}/{{totalQuestions}} </div>
       </div>
     <div class="row h-100 gx-0">
 
@@ -8,7 +8,7 @@
             <app-problem-panel [currentQuestion]="currentQuestion"></app-problem-panel>
         </div>
         <div class="right-panel col-md-12 col-lg-7 pt-4 pb-3 px-3">
-            <app-ide-panel [currentToken]="currentToken" class="ide-container" [currentProgress]="currentProgress" (emitNextQuestion)="handleNextQuestion($event)"></app-ide-panel>
+            <app-ide-panel [isTimed]="selectedMode_isTimed" [currentToken]="currentToken" [currentQuestion]="currentQuestion" class="ide-container" [currentProgress]="currentProgress" (emitNextQuestion)="handleNextQuestion($event)" (emitScriptsForExecution)="handleEmitScriptsForExecution($event)"></app-ide-panel>
         </div>
     </div>
 </div>

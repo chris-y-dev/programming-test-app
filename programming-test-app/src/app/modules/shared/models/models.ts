@@ -44,6 +44,7 @@ export class Question {
   defaultFunctionWithParameters: string;
   defaultTestCase: any;
   fiveTestCases: any[];
+  userScript: string | null;
 
   constructor(
     id: string,
@@ -52,7 +53,8 @@ export class Question {
     timeLimit: number,
     defaultFunctionWithParameters: string,
     defaultTestCase: TestCase,
-    fiveTestCases: TestCase[]
+    fiveTestCases: TestCase[],
+    userScript: string | null = null
   ) {
     this.id = id;
     this.title = title;
@@ -61,6 +63,7 @@ export class Question {
     this.defaultFunctionWithParameters = defaultFunctionWithParameters;
     this.defaultTestCase = defaultTestCase;
     this.fiveTestCases = fiveTestCases;
+    this.userScript = userScript;
   }
 }
 
@@ -71,5 +74,25 @@ export class TestCase {
   constructor(parameter: any, outcome: any) {
     this.parameter = parameter;
     this.outcome = outcome;
+  }
+}
+
+export class ExecuteScript {
+  script: string | null;
+  question: Question;
+
+  constructor(script: string | null, question: Question) {
+    this.script = script;
+    this.question = question;
+  }
+}
+
+export class ResultViewModel {
+  question: string;
+  passTestCase: boolean[];
+
+  constructor(question: string, passTestCase: boolean[] = []) {
+    this.question = question;
+    this.passTestCase = passTestCase;
   }
 }

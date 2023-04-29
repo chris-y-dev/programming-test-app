@@ -1,20 +1,50 @@
 @import "../../shared/styles/colours.scss";
-@import "../../home/select-mode/select-mode.component.scss";
+@import "../../shared/styles/layout.scss";
 
 .results-container{
     height: 100%;
     background-color: $app-bg-light-grey;
+    width: 100%;
 }
 
-.mode-container{
+.rows-container{
+    width: 100%;
+    max-width: $home-max-width;
+}
+
+.pill-container{
     border-radius: 12px;
     width: 120px;
+    padding: 0.2rem 0;
     text-align: center;
+
     &.bg-untimed{
-        background-color: rgb(172, 172, 172);
+        background-color: $mode-untimed-grey;
     }
 
     &.bg-timed{
-        background-color: rgb(238, 188, 163);
+        background-color: $mode-timed-orange;
     }
+
+    &.bg-beginner{
+        background-color: $color-beginner;
+    }
+
+    &.bg-intermediate{
+        background-color: $color-intermediate;
+    }
+
+    &.bg-advanced{
+        background-color: $color-advanced;
+    }
+}
+
+.pass-container{
+    font-size: 2.2rem;
+    color: $success-green;
+}
+
+.fail-container{
+    font-size: 2.2rem;
+    color: $error-red;
 }

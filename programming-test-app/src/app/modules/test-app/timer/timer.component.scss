@@ -1,0 +1,19 @@
+@import "../../shared/styles/colours.scss";
+
+.timer{
+    text-align: end;
+    font-size: 1.5rem;
+
+    .timer-width{
+        max-width: 120px;
+        text-align: end;
+    }
+
+    .alert-font{
+        color: red
+    }
+
+    .time-font{
+        color: greenyellow
+    }
+}

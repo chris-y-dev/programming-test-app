@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LanguageAndTopicService } from '../../shared/services/language-and-topic.service';
-import { Question, Topic } from '../../shared/models/models';
-
+import { ExecuteScript, Question, Topic } from '../../shared/models/models';
 @Component({
   selector: 'app-test-layout',
   templateUrl: './test-layout.component.html',
@@ -15,8 +14,11 @@ export class TestLayoutComponent implements OnInit {
   ) {}
 
   @Input() currentToken: string | null = null;
+  @Output() emitSubmittedScripts: EventEmitter<ExecuteScript[]> =
+    new EventEmitter();
 
   selectedTopic: Topic | null = null;
+  selectedMode_isTimed: boolean | null = null;
   randomQuestions: Question[] = [];
   currentQuestion: Question | null = null;
 
@@ -26,6 +28,8 @@ export class TestLayoutComponent implements OnInit {
     (this.currentProgress / this.totalQuestions) * 100;
 
   ngOnInit(): void {
+    this.selectedMode_isTimed = this.getMode(this.router.url.split('/')[2]);
+
     let topicId = this.router.url.split('/')[3];
 
     this.ltService
@@ -44,13 +48,22 @@ export class TestLayoutComponent implements OnInit {
       //Send code to JDoodle to compile
       //Navigate to results page
       console.log('FINISH');
-      this.router.navigate(['result', '001']);
+      // this.router.navigate(['result', '001']);
     } else {
       this.currentProgress = event;
       this.progressPercentage =
         (this.currentProgress / this.totalQuestions) * 100;
 
       this.currentQuestion = this.randomQuestions[this.currentProgress - 1];
+    }
+  }
+
+  getMode(mode: string) {
+    let selectedMode = mode.toLocaleLowerCase();
+    if (selectedMode == 'timed') {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -68,5 +81,9 @@ export class TestLayoutComponent implements OnInit {
     }
 
     // console.log(this.randomQuestions);
+  }
+
+  handleEmitScriptsForExecution(scripts: ExecuteScript[]) {
+    this.emitSubmittedScripts.emit(scripts);
   }
 }

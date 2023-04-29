@@ -1,6 +1,20 @@
-<div>
-    <h4>Test Case</h4>
-    <p>Test case works</p>
-    <p>Test case result</p>
-    <p>Test result 2</p>
+<div class="test-case-container mt-4 p-3" *ngIf="showTestCasePanel && testResponse$ != null">
+    <div class="">
+        <h4 class="d-inline-block me-3">Test Case</h4>
+        <span class="test-status py-1 px-3 passed" *ngIf="passOrFail==true">✅ Passed </span>
+        <span class="test-status py-1 px-3 failed" *ngIf="passOrFail==false">❌Failed</span>
+    </div>
+    <div class="input-output-label">Test Input</div>
+    <div class="code-container" id="test-input" [innerHTML]="displayInput">{{displayInput}}</div>
+    <div class="input-output-label">Expected Output</div>
+    <div class="code-container">{{currentQuestion?.defaultTestCase.outcome}}</div>
+    <div class="input-output-label">Your Output</div>
+    <div class="code-container output-container mb-3">{{testResponse$?.output}}</div>
+</div>
+
+<div class="test-case-container mt-4 p-3" *ngIf="showTestCasePanel && testResponse$ == null">
+    <div class="">
+        <h4 class="d-inline-block me-3">Loading...</h4>
+        
+    </div>
 </div>
