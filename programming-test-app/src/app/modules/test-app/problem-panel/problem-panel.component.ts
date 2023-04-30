@@ -13,6 +13,7 @@ export class ProblemPanelComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  //Makes output look nicer using new lines
   getLineSeparatedInputOutput(example: any | any[]) {
     if (!Array.isArray(example)) {
       return example;

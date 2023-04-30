@@ -20,7 +20,6 @@ export class SelectLanguageComponent implements OnInit {
   }
 
   handleLanguageSelect(lang: any) {
-    // console.log(lang);
     this.selectedLanguage = lang;
     this.emitSelectedLanguage.emit(this.selectedLanguage!);
   }

@@ -42,6 +42,7 @@ export class TestAppComponent implements OnInit {
 
     console.log(this.selectedTopic);
 
+    /**GET JDOODLE TOKEN IF NEEDED */
     // this.jdoodleService.getToken().subscribe((token) => {
     //   this.currentToken = token;
     //   console.log(this.currentToken);
@@ -58,7 +59,6 @@ export class TestAppComponent implements OnInit {
   }
 
   handleSubmittedScripts(submittedScripts: ExecuteScript[]) {
-    console.log('Test-app', submittedScripts);
     this.submittedScripts = submittedScripts;
     this.showResults = true;
   }

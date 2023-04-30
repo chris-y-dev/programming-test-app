@@ -61,35 +61,38 @@ export class ResultPageComponent implements OnInit {
     // this.executeMockTestCases();
   }
 
+  //Executes 5 test cases for each question
   executeTestCasesUsingJDoodle() {
-    //For each 5 scripts
+    //For submitted Script, execute against 5 test case
     this.submittedScripts.forEach((scriptAndQuestion) => {
       let questionResult = new ResultViewModel(
         scriptAndQuestion.question.title
       );
 
-      console.log(scriptAndQuestion.script);
+      console.log('SUBMITTED SCRIPT', scriptAndQuestion.script);
 
       //Test against 5 test cases
       scriptAndQuestion.question.fiveTestCases.forEach((testCase: TestCase) => {
-        //For each question, test against all 5 test cases
         this._jdoodleService
           .postScriptForExecution(scriptAndQuestion.script, testCase.parameter)
           .subscribe((res) => {
             //Check response against test case output.
             console.log('RES', res);
-            // this.executionResponses$?.push(res);
 
-            let passed;
+            let passed = false;
 
             if (res.output == testCase.outcome) {
               passed = true;
             } else {
               passed = false;
             }
+
+            //Add to array of results
             questionResult.passTestCase.push(passed);
           });
       });
+
+      //Add to array of question results
       this.executionResponses$.push(questionResult);
     });
   }
@@ -100,11 +103,10 @@ export class ResultPageComponent implements OnInit {
         scriptAndQuestion.question.title
       );
 
-      console.log(scriptAndQuestion.script);
+      console.log('SUBMITTED SCRIPT', scriptAndQuestion.script);
 
+      //Generates a pass/fail statically
       scriptAndQuestion.question.fiveTestCases.forEach((testCase: TestCase) => {
-        //Generates a pass/fail statically
-
         let passed;
 
         if (testCase.outcome.length > 5) {

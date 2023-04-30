@@ -17,12 +17,8 @@ export class SelectTopicComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // TODO: Use pipe + filter to sort through topics
-
   handleTopicSelect(topic: Topic) {
-    console.log(topic);
     this.selectedTopic = topic;
-    // this.router.navigate(['/test']);
     this.emitSelectedTopic.emit(this.selectedTopic);
   }
 
