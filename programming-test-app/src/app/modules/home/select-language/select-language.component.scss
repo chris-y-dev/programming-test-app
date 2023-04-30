@@ -1,4 +1,5 @@
 @import "../../shared/styles/colours.scss";
+@import "../../shared/styles/layout.scss";
 
 
 .language-container{
@@ -6,10 +7,15 @@
     height: 100%;
 }
 
+.row{
+    max-width: $home-max-width;
+    margin: auto;
+}
+
 .language-button{
     background-color: rgb(233, 233, 233);
     border: 1px solid $jdoodle-theme-orange;
-    color: rgb(70, 70, 70);
+    color: rgb(97, 97, 97);
     width: 110px;
     padding: 0.6rem;
     border-radius: 8px;
@@ -17,6 +23,12 @@
     margin: auto;
 
     &:hover{
-        background-color: rgb(189, 189, 189);
+        background-color: rgb(255, 233, 198);
+    }
+
+    &:disabled{
+        cursor:not-allowed;
+        border-color: grey;
+        background: $disabled-button-grey;
     }
 }

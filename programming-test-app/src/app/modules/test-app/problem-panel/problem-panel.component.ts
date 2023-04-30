@@ -12,4 +12,21 @@ export class ProblemPanelComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  getLineSeparatedInputOutput(example: any | any[]) {
+    if (!Array.isArray(example)) {
+      return example;
+    } else {
+      let str = '';
+
+      example.forEach((item, index) => {
+        if (index < example.length - 1) {
+          str += `${item + '<br>'}`;
+        } else {
+          str += `${item}`;
+        }
+      });
+      return str;
+    }
+  }
 }

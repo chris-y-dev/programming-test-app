@@ -12,9 +12,10 @@ export class JdoodleService {
     return this.http.get('http://localhost:3000/token');
   }
 
-  postScriptForExecution(script: any): Observable<any> {
+  postScriptForExecution(script: any, stdin: any): Observable<any> {
     return this.http.post('http://localhost:3000/execute', {
       script: script,
+      stdin: stdin,
     });
   }
 }

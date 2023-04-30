@@ -1,3 +1,3 @@
-<app-test-layout *ngIf="showResults==false" [currentToken]="currentToken" (emitSubmittedScripts)="handleSubmittedScripts($event)" ></app-test-layout>
+<app-test-layout *ngIf="showResults==false" [selectedLanguage]="selectedLanguage" [selectedTopic]="selectedTopic" [selectedTimed]="selectedTimed" [currentToken]="currentToken" (emitSubmittedScripts)="handleSubmittedScripts($event)" ></app-test-layout>
 
-<app-result-page *ngIf="showResults==true" [submittedScripts]="submittedScripts"></app-result-page>
+<app-result-page *ngIf="showResults==true" [selectedTopic]="selectedTopic" [selectedTimed]="selectedTimed" [submittedScripts]="submittedScripts"></app-result-page>

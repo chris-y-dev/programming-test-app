@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Language, Topic } from '../../shared/models/models';
+import { Language, Topic, TopicDifficulty } from '../../shared/models/models';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,5 +24,23 @@ export class SelectTopicComponent implements OnInit {
     this.selectedTopic = topic;
     // this.router.navigate(['/test']);
     this.emitSelectedTopic.emit(this.selectedTopic);
+  }
+
+  filterBeginnerTopics() {
+    return this.selectedLanguage?.topics.filter(
+      (topic) => topic.difficulty == TopicDifficulty.Beginner
+    );
+  }
+
+  filterIntermediateTopics() {
+    return this.selectedLanguage?.topics.filter(
+      (topic) => topic.difficulty == TopicDifficulty.Intermediate
+    );
+  }
+
+  filterAdvancedTopics() {
+    return this.selectedLanguage?.topics.filter(
+      (topic) => topic.difficulty == TopicDifficulty.Advanced
+    );
   }
 }

@@ -3,7 +3,7 @@
         <h1 class="text-center mb-3">{{selectedTopic?.name}}</h1>
         <span [ngClass]="getDifficultyClass(selectedTopic?.difficulty)" class="difficulty-container p-1">{{getDifficultyText(selectedTopic?.difficulty)}}</span>
     </div>
-    <div class="instructions-container mt-4">
+    <div class="instructions-container mt-4 px-3">
 
         <h4>Topic Details</h4>
         <p *ngFor="let desc of selectedTopic?.description">{{desc}}</p>

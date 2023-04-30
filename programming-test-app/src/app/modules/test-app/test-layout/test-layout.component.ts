@@ -1,7 +1,12 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LanguageAndTopicService } from '../../shared/services/language-and-topic.service';
-import { ExecuteScript, Question, Topic } from '../../shared/models/models';
+import {
+  ExecuteScript,
+  Language,
+  Question,
+  Topic,
+} from '../../shared/models/models';
 @Component({
   selector: 'app-test-layout',
   templateUrl: './test-layout.component.html',
@@ -17,8 +22,9 @@ export class TestLayoutComponent implements OnInit {
   @Output() emitSubmittedScripts: EventEmitter<ExecuteScript[]> =
     new EventEmitter();
 
-  selectedTopic: Topic | null = null;
-  selectedMode_isTimed: boolean | null = null;
+  @Input() selectedLanguage: Language | null = null;
+  @Input() selectedTopic: Topic | null = null;
+  @Input() selectedTimed: boolean | null = null;
   randomQuestions: Question[] = [];
   currentQuestion: Question | null = null;
 
@@ -28,22 +34,13 @@ export class TestLayoutComponent implements OnInit {
     (this.currentProgress / this.totalQuestions) * 100;
 
   ngOnInit(): void {
-    this.selectedMode_isTimed = this.getMode(this.router.url.split('/')[2]);
-
-    let topicId = this.router.url.split('/')[3];
-
-    this.ltService
-      .getTopicById(topicId)
-      .then((data) =>
-        data.subscribe((topic) => {
-          this.selectedTopic = topic;
-        })
-      )
-      .then(() => this.getFiveRandomQuestions())
-      .then(() => (this.currentQuestion = this.randomQuestions[0]));
+    this.getFiveRandomQuestions();
+    this.currentQuestion = this.randomQuestions[0];
   }
 
   handleNextQuestion(event: number) {
+    console.log('Layout, Next event', event);
+    console.log(this.currentProgress);
     if (event == 6) {
       //Send code to JDoodle to compile
       //Navigate to results page
@@ -55,15 +52,6 @@ export class TestLayoutComponent implements OnInit {
         (this.currentProgress / this.totalQuestions) * 100;
 
       this.currentQuestion = this.randomQuestions[this.currentProgress - 1];
-    }
-  }
-
-  getMode(mode: string) {
-    let selectedMode = mode.toLocaleLowerCase();
-    if (selectedMode == 'timed') {
-      return true;
-    } else {
-      return false;
     }
   }
 

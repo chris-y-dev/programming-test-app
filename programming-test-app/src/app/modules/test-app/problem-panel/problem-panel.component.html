@@ -4,9 +4,17 @@
         <p>
             {{currentQuestion?.description}}
         </p>
-        <p>
-            {{currentQuestion?.description}}
-        </p>
+
+        <div *ngFor="let example of currentQuestion?.examples" class="example-container mt-5">
+            <div class="label-example-explaination">
+                {{example.explaination}}
+            </div>
+            <div class="label-code-container">Input</div>
+            <div class="code-container" [innerHTML]="getLineSeparatedInputOutput(example.parameter)"></div>
+            <div class="label-code-container">Output</div>
+            <div class="code-container" [innerHTML]="getLineSeparatedInputOutput(example.outcome)"></div>
+
+        </div>
             
     </div>
 </div>

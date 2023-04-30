@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UtilsService } from '../../shared/utils/utils.service';
-import { EventEmitterService } from '../../shared/services/event-emitter.service';
 import { JdoodleService } from '../../shared/services/jdoodle.service';
 import {
   ExecuteScript,
   ResultViewModel,
   TestCase,
+  Topic,
 } from '../../shared/models/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-result-page',
@@ -14,11 +15,15 @@ import {
   styleUrls: ['./result-page.component.scss'],
 })
 export class ResultPageComponent implements OnInit {
+  @Input() selectedTopic: Topic | null = null;
+  @Input() selectedTimed: boolean | null = null;
+
   @Input() submittedScripts: ExecuteScript[] = [];
   executionResponses$: ResultViewModel[] = [];
 
   constructor(
-    private utilsService: UtilsService,
+    private _utilsService: UtilsService,
+    private _router: Router,
     private _jdoodleService: JdoodleService
   ) {}
 
@@ -29,11 +34,11 @@ export class ResultPageComponent implements OnInit {
   }
 
   getDifficultyClass(difficulty: number | undefined): string {
-    return this.utilsService.getDifficultyClass(difficulty);
+    return this._utilsService.getDifficultyClass(difficulty);
   }
 
   getDifficultyText(difficulty: number | undefined): string {
-    return this.utilsService.getDifficultyText(difficulty);
+    return this._utilsService.getDifficultyText(difficulty);
   }
 
   getModeClass(mode: string | undefined): string {
@@ -53,39 +58,43 @@ export class ResultPageComponent implements OnInit {
         scriptAndQuestion.question.title
       );
 
-      scriptAndQuestion.question.fiveTestCases.forEach((testCase: TestCase) => {
-        //For each question, test against all 5 test cases
-        // this._jdoodleService
-        //   .postScriptForExecution(scriptAndQuestion.script)
-        //   .subscribe((res) => {
-        //     //Check response against test case output.
-        //     console.log('RES', res);
-        //     // this.executionResponses$?.push(res);
+      console.log(scriptAndQuestion.script);
 
-        //     console.log('EXPECTEWD', testCase.outcome);
+      // scriptAndQuestion.question.fiveTestCases.forEach((testCase: TestCase) => {
+      //   //For each question, test against all 5 test cases
+      //   this._jdoodleService
+      //     .postScriptForExecution(scriptAndQuestion.script, scriptAndQuestion.script)
+      //     .subscribe((res) => {
+      //       //Check response against test case output.
+      //       console.log('RES', res);
+      //       // this.executionResponses$?.push(res);
 
-        //     let passed;
+      //       let passed;
 
-        //     if (res.output == testCase.outcome) {
-        //       passed = true;
-        //     } else {
-        //       passed = false;
-        //     }
-        //     questionResult.passTestCase.push(passed);
-        //   });
+      //       if (res.output == testCase.outcome) {
+      //         passed = true;
+      //       } else {
+      //         passed = false;
+      //       }
+      //       questionResult.passTestCase.push(passed);
+      //     });
 
-        let passed;
+      //   let passed;
 
-        if (testCase.outcome.length > 5) {
-          passed = true;
-        } else {
-          passed = false;
-        }
-        questionResult.passTestCase.push(passed);
-        // });
-      });
+      //   if (testCase.outcome.length > 5) {
+      //     passed = true;
+      //   } else {
+      //     passed = false;
+      //   }
+      //   questionResult.passTestCase.push(passed);
+      //   // });
+      // });
 
       this.executionResponses$.push(questionResult);
     });
+  }
+
+  handleBeginQuiz() {
+    this._router.navigate(['/']);
   }
 }

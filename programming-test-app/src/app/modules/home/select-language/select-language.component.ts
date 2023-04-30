@@ -16,9 +16,7 @@ export class SelectLanguageComponent implements OnInit {
   constructor(private lts: LanguageAndTopicService) {}
 
   ngOnInit(): void {
-    this.lts
-      .getAllLanguages()
-      .then((obs) => obs.subscribe((data) => (this.languageData = data)));
+    this.lts.getAllLanguages().subscribe((data) => (this.languageData = data));
   }
 
   handleLanguageSelect(lang: any) {

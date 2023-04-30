@@ -26,7 +26,11 @@ export class TimerComponent implements OnInit, OnChanges {
 
   constructor() {}
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['currentQuestion'] != null) {
+    console.log('TIMER CHANGE', changes);
+
+    if (changes['questionTimeLimitSeconds'] != null) {
+      this.questionTimeLimitSeconds =
+        changes['questionTimeLimitSeconds'].currentValue;
       this.startTimer();
     }
   }

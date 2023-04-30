@@ -1,3 +1,5 @@
+@import "../../shared/styles/colours.scss";
+
 .panel-container{
     width: 80%;
     max-width: 800px;
@@ -5,5 +7,29 @@
     p{
         line-height: 1.7;
         margin-bottom: 1.2rem;
+    }
+}
+
+.example-container{
+    padding: 1rem;
+    border-radius: 6px;
+    background-color: $app-bg-light-grey-shade;
+
+    
+    .label-example-explaination{
+        font-weight: bold;
+    }
+    
+    .label-code-container{
+        font-size: 1rem;
+        margin-top: 0.6rem;
+        margin-bottom: 0.2rem;
+        
+    }
+    .code-container{
+        color: white;
+        padding: 0.5rem;
+        background-color: $code-container-dark;
+        border-radius: 6px;
     }
 }
