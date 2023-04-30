@@ -1,13 +1,16 @@
-<div class="ide-container">
+<div class="ide-container px-4">
     <div class="timer my-3">
         <app-timer #timer *ngIf="isTimed == true" (emitTimesUpEvent)="handleTimesUp($event)" [questionTimeLimitSeconds]="currentQuestion?.timeLimit"></app-timer>
     </div>
     <textarea rows="5" id="ide" (keydown)="onInput($event)" [disabled]="timesUp == true" [ngClass]="timesUp? 'cursor-ban' : ''"></textarea>
 </div>
-<div class="buttons-container d-flex flex-row justify-content-end mt-3">
+<div class="buttons-container d-flex flex-row justify-content-end mt-3 px-2">
     <button class="btn mx-3 ide-button --test" (click)="handleTest()">Test</button>
     <button class="btn mx-3 ide-button --next" (click)="handleNext()">{{getNextButtonText()}}</button>
 </div>
-<app-test-case-panel [showTestCasePanel]="showTestCasePanel" [currentQuestion]="currentQuestion" [testResponse$]="testResponse$"></app-test-case-panel>
+<div class="px-4">
 
+    <app-test-case-panel [showTestCasePanel]="showTestCasePanel" [currentQuestion]="currentQuestion" [testResponse$]="testResponse$"></app-test-case-panel>
+</div>
+    
  

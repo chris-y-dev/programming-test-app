@@ -15,12 +15,12 @@
         color: white;
         padding: 1rem;
         
-        @include media-breakpoint-down(lg){
-            max-height: 400px;
-        }
-
         &.cursor-ban{
             cursor:not-allowed;
+        }
+
+        @include media-breakpoint-down(lg){
+            max-height: 400px;
         }
     }
 }
