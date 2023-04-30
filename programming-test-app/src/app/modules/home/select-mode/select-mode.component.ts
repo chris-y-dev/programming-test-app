@@ -16,8 +16,7 @@ export class SelectModeComponent implements OnInit {
   ngOnInit(): void {}
 
   onSelectMode(event: any) {
-    console.log(this.selectedTopic);
-    console.log(event.target.value);
+    //Generate URL
     this.router.navigate(['test', event.target.value, this.selectedTopic?.id]);
   }
 

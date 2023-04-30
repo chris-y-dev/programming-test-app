@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { Language, Topic } from 'src/app/modules/shared/models/models';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-home-page',
+  templateUrl: './home-page.component.html',
+  styleUrls: ['./home-page.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomePageComponent implements OnInit {
   title = 'programming-test-app';
   selectedLanguage: Language | null = null;
   selectedTopic: Topic | null = null;
@@ -18,19 +18,16 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {}
 
   handleSelectLanguage(event: Language) {
-    console.log(event);
     this.selectedLanguage = event;
     this.step++;
   }
 
   handleSelectTopic(event: Topic) {
-    console.log(event);
     this.selectedTopic = event;
     this.step++;
   }
 
   handleSelectMode(event: any) {
-    console.log(event);
     this.router.navigate(['/test']);
   }
 }

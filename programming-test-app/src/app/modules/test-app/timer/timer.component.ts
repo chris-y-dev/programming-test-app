@@ -19,12 +19,12 @@ export class TimerComponent implements OnInit, OnChanges {
 
   minutes: string = '';
   seconds: string = '';
-
   targetTime: number | null = null;
   oneMinuteLeft: boolean = false;
   timesUp: boolean = false;
 
   constructor() {}
+
   ngOnChanges(changes: SimpleChanges): void {
     console.log('TIMER CHANGE', changes);
 

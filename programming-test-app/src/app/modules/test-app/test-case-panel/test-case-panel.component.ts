@@ -37,6 +37,7 @@ export class TestCasePanelComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {}
 
+  //Add new line if stdin is an array
   generateInputDisplay() {
     this.displayInput = '';
 

@@ -13,18 +13,15 @@ import {
   styleUrls: ['./test-layout.component.scss'],
 })
 export class TestLayoutComponent implements OnInit {
-  constructor(
-    private router: Router,
-    private ltService: LanguageAndTopicService
-  ) {}
+  constructor() {}
 
   @Input() currentToken: string | null = null;
-  @Output() emitSubmittedScripts: EventEmitter<ExecuteScript[]> =
-    new EventEmitter();
 
   @Input() selectedLanguage: Language | null = null;
   @Input() selectedTopic: Topic | null = null;
   @Input() selectedTimed: boolean | null = null;
+  @Output() emitSubmittedScripts: EventEmitter<ExecuteScript[]> =
+    new EventEmitter();
   randomQuestions: Question[] = [];
   currentQuestion: Question | null = null;
 
@@ -39,14 +36,7 @@ export class TestLayoutComponent implements OnInit {
   }
 
   handleNextQuestion(event: number) {
-    console.log('Layout, Next event', event);
-    console.log(this.currentProgress);
-    if (event == 6) {
-      //Send code to JDoodle to compile
-      //Navigate to results page
-      console.log('FINISH');
-      // this.router.navigate(['result', '001']);
-    } else {
+    if (event < 6) {
       this.currentProgress = event;
       this.progressPercentage =
         (this.currentProgress / this.totalQuestions) * 100;
@@ -55,9 +45,10 @@ export class TestLayoutComponent implements OnInit {
     }
   }
 
-  async getFiveRandomQuestions() {
+  getFiveRandomQuestions() {
     var questionBank: Question[] | undefined = this.selectedTopic?.questions;
     if (questionBank != undefined) {
+      //Randomly select 5 from bank of questions
       for (let i = 0; i < 5; i++) {
         let randomIndex = Math.floor(Math.random() * (questionBank.length - 1));
         this.randomQuestions.push(questionBank[randomIndex]);
@@ -67,8 +58,6 @@ export class TestLayoutComponent implements OnInit {
         });
       }
     }
-
-    // console.log(this.randomQuestions);
   }
 
   handleEmitScriptsForExecution(scripts: ExecuteScript[]) {

@@ -45,11 +45,17 @@ export class IdePanelComponent implements OnInit, OnChanges {
 
   finishedScripts: ExecuteScript[] = [];
 
-  constructor(private jdoodleService: JdoodleService, private router: Router) {}
+  constructor(private _jdoodleService: JdoodleService) {}
 
   ngOnInit(): void {
     this.renderDefaultScriptInIDE();
 
+    //Enable tab input
+    const textarea = document.querySelector('textarea');
+    enableTabToIndent(textarea!);
+
+    /**WEBSOCKET API NOT CURRENTLY USED */
+    /** 
     this.loadScript(
       'https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js'
     );
@@ -62,15 +68,12 @@ export class IdePanelComponent implements OnInit, OnChanges {
       }
     );
 
-    // this.socketClient.connect(
-    //   {},
-    //   this.onWsConnection,
-    //   this.onWsConnectionFailed
-    // );
-
-    //Enable tab input
-    const textarea = document.querySelector('textarea');
-    enableTabToIndent(textarea!);
+    this.socketClient.connect(
+      {},
+      this.onWsConnection,
+      this.onWsConnectionFailed
+    );
+    */
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -79,73 +82,8 @@ export class IdePanelComponent implements OnInit, OnChanges {
     }
   }
 
-  // onWsConnection() {
-  //   console.log('connection succeeded');
-  //   let wsNextId = 0;
-
-  //   this.socketClient.subscribe('/user/queue/execute-i', (message: any) => {
-  //     let msgId = message.headers['message-id'];
-  //     let msgSeq = parseInt(msgId.substring(msgId.lastIndexOf('-') + 1));
-
-  //     let statusCode = parseInt(message.headers.statusCode);
-
-  //     if (statusCode === 201) {
-  //       wsNextId = msgSeq + 1;
-  //       return;
-  //     }
-
-  //     let t0;
-  //     try {
-  //       t0 = performance.now();
-  //       while (performance.now() - t0 < 2500 && wsNextId !== msgSeq) {}
-  //     } catch (e) {}
-
-  //     if (statusCode === 204) {
-  //       //executionTime = message.body
-  //     } else if (statusCode === 500 || statusCode === 410) {
-  //       //server error
-  //       console.log('server error');
-  //     } else if (statusCode === 206) {
-  //       //outputFiles = JSON.parse(message.body)
-  //       //returns file list - not supported in this custom api
-  //     } else if (statusCode === 429) {
-  //       //Daily limit reached
-  //       console.log('daily limit reached');
-  //     } else if (statusCode === 400) {
-  //       //Invalid request - invalid signature or token expired - check the body for details
-  //       console.log('invalid request - invalid signature or token expired');
-  //     } else if (statusCode === 401) {
-  //       //Unauthorised request
-  //       console.log('Unauthorised request');
-  //     } else {
-  //       var txt = (document.getElementById('result') as HTMLInputElement).value;
-  //       (document.getElementById('result') as HTMLInputElement).value =
-  //         txt + message.body;
-  //     }
-
-  //     wsNextId = msgSeq + 1;
-  //   });
-
-  //   let script = `console.log("HELLO")`;
-
-  //   let data = JSON.stringify({
-  //     script: script,
-  //     language: 'nodejs',
-  //     versionIndex: 0,
-  //   });
-
-  //   this.socketClient.send('/app/execute-ws-api-token', data, {
-  //     message_type: 'execute',
-  //     token: this.currentToken,
-  //   });
-  // }
-
-  onWsConnectionFailed(e: any) {
-    console.log('connection failed');
-    console.log(e);
-  }
-
-  public loadScript(url: string) {
+  //This method dynamically loads additional JS scripts to DOM
+  loadScript(url: string) {
     const body = document.body;
     const script = document.createElement('script');
     script.innerHTML = '';
@@ -156,54 +94,33 @@ export class IdePanelComponent implements OnInit, OnChanges {
     body.appendChild(script);
   }
 
-  onInput(event: any) {
-    // console.log('Value', event.target.value);
-    // console.log('Key', event.key);
-    //For WebsocketAPI
-    // let key = event.key;
-    // console.log(key);
-    // if (event.key === 'Enter') {
-    //   key = '\n';
-    // }
-    // if (event.key !== 'Backspace') {
-    //   this.codeInput = `${event.target.value + key}`;
-    // } else {
-    //   this.codeInput = this.codeInput.slice(0, this.codeInput.length - 1);
-    //   console.log(this.codeInput);
-    // }
-    // this.socketClient.send('/app/execute-ws-api-token', key, {
-    //   message_type: 'input',
-    // });
-  }
-
+  //This method generates the pre-filled code in IDE
   renderDefaultScriptInIDE() {
     var textArea = document.getElementById('ide') as HTMLInputElement;
 
-    var defaultFuncName = this.currentQuestion?.defaultFunctionWithParameters;
+    //Default function for each question
+    var defaultFunctionName =
+      this.currentQuestion?.defaultFunctionWithParameters;
 
+    //Default template for each language
     var defaultScript = this.selectedLanguage?.defaultScript;
 
-    var script = `function ${defaultFuncName}${defaultScript}`;
-
-    console.log(script);
+    //Combine the two
+    var script = `function ${defaultFunctionName}${defaultScript}`;
 
     textArea.value = script;
   }
 
   handleTest() {
-    // console.log(this.codeInput);
     this.showTestCasePanel = true;
 
-    const finalScript: string | undefined =
+    //Get execution script
+    const executionScript: string | undefined =
       this.generateFullScriptForExecution();
 
-    this.socketClient.send('/app/execute-ws-api-token', this.codeInput, {
-      message_type: 'input',
-    });
-
-    this.jdoodleService
+    this._jdoodleService
       .postScriptForExecution(
-        finalScript,
+        executionScript,
         this.currentQuestion?.defaultTestCase.parameter
       )
       .subscribe((res) => {
@@ -213,7 +130,7 @@ export class IdePanelComponent implements OnInit, OnChanges {
   }
 
   handleNext() {
-    //TODO: Store code for later processing
+    //Generate execution script and store for later use
     const finalScript: string | undefined =
       this.generateFullScriptForExecution();
 
@@ -234,22 +151,19 @@ export class IdePanelComponent implements OnInit, OnChanges {
     }
 
     //Clean up current page
-
-    // if (textArea != null) {
-    //   textArea.value = '';
-    // }
-
     this.testResponse$ = null;
     this.showTestCasePanel = false;
   }
 
   generateFullScriptForExecution(): string | undefined {
+    //Get current input
     var textArea = document.getElementById('ide') as HTMLInputElement;
-    console.log(textArea.value);
-
     const userInput = textArea.value;
 
+    //Get script from data
     var script = this.currentQuestion?.executionScript;
+
+    //Insert input into script
     var finalScript = script?.replace('//USERINPUT', userInput);
 
     return finalScript;
@@ -267,5 +181,89 @@ export class IdePanelComponent implements OnInit, OnChanges {
     this.timesUp = isTimesUp;
   }
 
-  executeAllScriptsOnJDoodle() {}
+  /**WEBSOCKET API METHODS NOT CURRENTLY USED: */
+
+  onInput(event: any) {
+    /** WEBSOCKET API NOT CURRENTLY USED */
+    // let key = event.key;
+    // console.log(key);
+    // if (event.key === 'Enter') {
+    //   key = '\n';
+    // }
+    // if (event.key !== 'Backspace') {
+    //   this.codeInput = `${event.target.value + key}`;
+    // } else {
+    //   this.codeInput = this.codeInput.slice(0, this.codeInput.length - 1);
+    //   console.log(this.codeInput);
+    // }
+    // this.socketClient.send('/app/execute-ws-api-token', key, {
+    //   message_type: 'input',
+    // });
+  }
+
+  onWsConnection() {
+    console.log('connection succeeded');
+    let wsNextId = 0;
+
+    this.socketClient.subscribe('/user/queue/execute-i', (message: any) => {
+      let msgId = message.headers['message-id'];
+      let msgSeq = parseInt(msgId.substring(msgId.lastIndexOf('-') + 1));
+
+      let statusCode = parseInt(message.headers.statusCode);
+
+      if (statusCode === 201) {
+        wsNextId = msgSeq + 1;
+        return;
+      }
+
+      let t0;
+      try {
+        t0 = performance.now();
+        while (performance.now() - t0 < 2500 && wsNextId !== msgSeq) {}
+      } catch (e) {}
+
+      if (statusCode === 204) {
+        //executionTime = message.body
+      } else if (statusCode === 500 || statusCode === 410) {
+        //server error
+        console.log('server error');
+      } else if (statusCode === 206) {
+        //outputFiles = JSON.parse(message.body)
+        //returns file list - not supported in this custom api
+      } else if (statusCode === 429) {
+        //Daily limit reached
+        console.log('daily limit reached');
+      } else if (statusCode === 400) {
+        //Invalid request - invalid signature or token expired - check the body for details
+        console.log('invalid request - invalid signature or token expired');
+      } else if (statusCode === 401) {
+        //Unauthorised request
+        console.log('Unauthorised request');
+      } else {
+        var txt = (document.getElementById('result') as HTMLInputElement).value;
+        (document.getElementById('result') as HTMLInputElement).value =
+          txt + message.body;
+      }
+
+      wsNextId = msgSeq + 1;
+    });
+
+    let script = `console.log("HELLO")`;
+
+    let data = JSON.stringify({
+      script: script,
+      language: 'nodejs',
+      versionIndex: 0,
+    });
+
+    this.socketClient.send('/app/execute-ws-api-token', data, {
+      message_type: 'execute',
+      token: this.currentToken,
+    });
+  }
+
+  onWsConnectionFailed(e: any) {
+    console.log('connection failed');
+    console.log(e);
+  }
 }
