@@ -32,5 +32,6 @@ When credits are expired, test cases can no longer be executed
 1. Using VSCode, navigate to the file `/programming-test-app/src/app/modules/test-app/result-page/result-page.component.ts`
 2. Comment out the method call `executeTestCasesUsingJDoodle()` on line 58
 3. Uncomment the method call `executeMockTestCases()` on line 61
+4. Save and re-run the application. The Results page should now generate static pass/fail results.
 
 ![Application Landing Page](./readme_assets/api_vs_static_test_results.jpg)

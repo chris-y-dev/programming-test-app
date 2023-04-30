@@ -1,5 +1,4 @@
-# Client App
-
+# Server App
 This project includes a ClientApp `/programming-test-app` and Server `/server`
 
 To run the applicaiton, you must run these two programs on **Separate Terminals** at the same time.
