@@ -53,6 +53,15 @@ export class ResultPageComponent implements OnInit {
   }
 
   executeScripts() {
+    /**EXECUTE USING JDOODLE CREDITS  */
+    /**COMMENT OUT THIS METHOD IF NO CREDITS REMAIN  */
+    this.executeTestCasesUsingJDoodle();
+
+    /**UNCOMMENT THIS TO GENERATE RANDOM PASS/FAIL IF NO CREDITS REMAIN  */
+    // this.executeMockTestCases()
+  }
+
+  executeTestCasesUsingJDoodle() {
     this.submittedScripts.forEach((scriptAndQuestion) => {
       let questionResult = new ResultViewModel(
         scriptAndQuestion.question.title
@@ -60,35 +69,53 @@ export class ResultPageComponent implements OnInit {
 
       console.log(scriptAndQuestion.script);
 
-      // scriptAndQuestion.question.fiveTestCases.forEach((testCase: TestCase) => {
-      //   //For each question, test against all 5 test cases
-      //   this._jdoodleService
-      //     .postScriptForExecution(scriptAndQuestion.script, scriptAndQuestion.script)
-      //     .subscribe((res) => {
-      //       //Check response against test case output.
-      //       console.log('RES', res);
-      //       // this.executionResponses$?.push(res);
+      scriptAndQuestion.question.fiveTestCases.forEach((testCase: TestCase) => {
+        //For each question, test against all 5 test cases
+        this._jdoodleService
+          .postScriptForExecution(
+            scriptAndQuestion.script,
+            scriptAndQuestion.script
+          )
+          .subscribe((res) => {
+            //Check response against test case output.
+            console.log('RES', res);
+            // this.executionResponses$?.push(res);
 
-      //       let passed;
+            let passed;
 
-      //       if (res.output == testCase.outcome) {
-      //         passed = true;
-      //       } else {
-      //         passed = false;
-      //       }
-      //       questionResult.passTestCase.push(passed);
-      //     });
+            if (res.output == testCase.outcome) {
+              passed = true;
+            } else {
+              passed = false;
+            }
+            questionResult.passTestCase.push(passed);
+          });
 
-      //   let passed;
+        this.executionResponses$.push(questionResult);
+      });
+    });
+  }
 
-      //   if (testCase.outcome.length > 5) {
-      //     passed = true;
-      //   } else {
-      //     passed = false;
-      //   }
-      //   questionResult.passTestCase.push(passed);
-      //   // });
-      // });
+  executeMockTestCases() {
+    this.submittedScripts.forEach((scriptAndQuestion) => {
+      let questionResult = new ResultViewModel(
+        scriptAndQuestion.question.title
+      );
+
+      console.log(scriptAndQuestion.script);
+
+      scriptAndQuestion.question.fiveTestCases.forEach((testCase: TestCase) => {
+        //Generates a pass/fail statically
+
+        let passed;
+
+        if (testCase.outcome.length > 5) {
+          passed = true;
+        } else {
+          passed = false;
+        }
+        questionResult.passTestCase.push(passed);
+      });
 
       this.executionResponses$.push(questionResult);
     });

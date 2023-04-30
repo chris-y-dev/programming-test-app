@@ -24,4 +24,13 @@ To run the applicaiton, you must run these two programs on **Separate Terminals*
 ![Application Landing Page](./readme_assets/app_landing_page.jpg)
 
 ## NOTE: Maximum JDoodle Credits
+When the server is running, credits used can be checked using URL `http://localhost:3000/credits`. Each day, 200 credits can be used.
 
+**Executing all test cases requires 25 credits**
+When credits are expired, test cases can no longer be executed
+
+1. Using VSCode, navigate to the file `/programming-test-app/src/app/modules/test-app/result-page/result-page.component.ts`
+2. Comment out the method call `executeTestCasesUsingJDoodle()` on line 58
+3. Uncomment the method call `executeMockTestCases()` on line 61
+
+![Application Landing Page](./readme_assets/api_vs_static_test_results.jpg)
