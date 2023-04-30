@@ -81,7 +81,9 @@ export class ResultPageComponent implements OnInit {
 
             let passed = false;
 
-            if (res.output == testCase.outcome) {
+            const cleanedOutput = res.output.replace('\n', '');
+
+            if (cleanedOutput == testCase.outcome) {
               passed = true;
             } else {
               passed = false;
