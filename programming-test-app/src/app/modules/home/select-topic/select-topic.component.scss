@@ -12,34 +12,44 @@
 }
 
 .topic-button{
-    
     width: 160px;
     padding: 0.8rem 0.6rem;
     border-radius: 8px;
     border: none;
-    margin: auto;  
-}
+    margin: auto;
+    
 
-.bg-beginner{
-    background-color: $color-beginner;
 
-    &:hover{
-        background-color: $color-beginner--hover
+    &.bg-beginner{
+        background-color: $color-beginner;
+    
+        &:hover:enabled{
+            background-color: $color-beginner--hover
+        }
     }
-}
-
-.bg-intermediate{
-    background-color: $color-intermediate;
-
-    &:hover{
-        background-color: $color-intermediate--hover;
+    
+    &.bg-intermediate{
+        background-color: $color-intermediate;
+    
+        &:hover:enabled{
+            background-color: $color-intermediate--hover;
+        }
     }
-}
-
-.bg-advanced{
-    background-color: $color-advanced;
-
-    &:hover{
-        background-color: $color-advanced--hover;
+    
+    &.bg-advanced{
+        background-color: $color-advanced;
+    
+        &:hover:enabled{
+            background-color: $color-advanced--hover;
+        }
     }
+
+    &:disabled{
+        background-color: $disabled-button-grey;
+        cursor:not-allowed;
+        color: rgb(97, 97, 97)
+    }
+
+
 }
+

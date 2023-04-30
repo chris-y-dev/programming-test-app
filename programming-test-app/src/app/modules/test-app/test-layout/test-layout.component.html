@@ -2,13 +2,13 @@
     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100">
         <div class="progress-bar progress-bar-striped progress-bar-animated jdoodle-orange" style="width: {{progressPercentage.toString() + '%'}}">Question {{currentProgress}}/{{totalQuestions}} </div>
       </div>
-    <div class="row h-100 gx-0">
+    <div class="row gx-0">
 
-        <div class="left-panel col-md-12 col-lg-5  pt-4 pb-3 px-3">
+        <div class="left-panel col-md-12 col-lg-5  pt-4 py-3 px-3">
             <app-problem-panel [currentQuestion]="currentQuestion"></app-problem-panel>
         </div>
-        <div class="right-panel col-md-12 col-lg-7 pt-4 pb-3 px-3">
-            <app-ide-panel [isTimed]="selectedMode_isTimed" [currentToken]="currentToken" [currentQuestion]="currentQuestion" class="ide-container" [currentProgress]="currentProgress" (emitNextQuestion)="handleNextQuestion($event)" (emitScriptsForExecution)="handleEmitScriptsForExecution($event)"></app-ide-panel>
+        <div class="right-panel col-md-12 col-lg-7 pt-4 py-3 px-3">
+            <app-ide-panel [isTimed]="selectedTimed" [selectedLanguage]="selectedLanguage" [currentToken]="currentToken" [currentQuestion]="currentQuestion" class="ide-container" [currentProgress]="currentProgress" (emitNextQuestion)="handleNextQuestion($event)" (emitScriptsForExecution)="handleEmitScriptsForExecution($event)"></app-ide-panel>
         </div>
     </div>
 </div>

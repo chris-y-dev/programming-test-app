@@ -53,16 +53,26 @@ export class TestCasePanelComponent implements OnInit, OnChanges {
     } else {
       this.displayInput = this.currentQuestion?.defaultTestCase.parameter;
     }
+
+    this.getPassOrFail();
   }
 
   getPassOrFail() {
     if (
-      this.testResponse$?.output.split('\n')[0] ==
+      this.testResponse$?.output.split('\n').join('') ==
       this.currentQuestion?.defaultTestCase.outcome
     ) {
       this.passOrFail = true;
     } else {
       this.passOrFail = false;
     }
+  }
+
+  addLineBreaksToOutput(event: any) {
+    let output = '';
+
+    output = event.replace('\n', '<br>');
+
+    return output;
   }
 }

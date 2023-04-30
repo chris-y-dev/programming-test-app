@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
-import { js, csharp, allLanguages, allQuestions, allTopics } from './data';
+import { js, allLanguages, allQuestions, allTopics } from './data';
 
 @Injectable({
   providedIn: 'root',
@@ -11,20 +11,29 @@ import { js, csharp, allLanguages, allQuestions, allTopics } from './data';
 export class LanguageAndTopicService {
   constructor() {}
   js = js;
-  csharp = csharp;
   allLanguages = allLanguages;
   allTopics = allTopics;
   allQuestions = allQuestions;
 
-  async getAllLanguages(): Promise<Observable<Language[]>> {
+  getAllLanguages(): Observable<Language[]> {
     return of(this.allLanguages);
   }
 
-  async getAllTopics(): Promise<Observable<Topic[]>> {
+  getLanguageById(name: string): Observable<Language | null> {
+    var foundLang = this.allLanguages.find((l) => l.name == name);
+
+    if (foundLang != undefined) {
+      return of(foundLang);
+    } else {
+      return of(null);
+    }
+  }
+
+  getAllTopics(): Observable<Topic[]> {
     return of(this.allTopics);
   }
 
-  async getTopicById(id: string): Promise<Observable<Topic | null>> {
+  getTopicById(id: string): Observable<Topic | null> {
     var foundTopic = this.allTopics.find((t) => t.id == id);
 
     if (foundTopic != undefined) {
@@ -34,7 +43,7 @@ export class LanguageAndTopicService {
     }
   }
 
-  async getQuestionById(id: string): Promise<Observable<Question | null>> {
+  getQuestionById(id: string): Observable<Question | null> {
     var foundQuestion = this.allQuestions.find((q) => q.id == id);
 
     if (foundQuestion != undefined) {

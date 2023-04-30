@@ -1,10 +1,19 @@
 export class Language {
   name: string;
   topics: Topic[];
+  defaultScript: string;
+  disabled: boolean;
 
-  constructor(name: string, topic: Topic[]) {
+  constructor(
+    name: string,
+    topic: Topic[],
+    defaultScript: string,
+    disabled: boolean = false
+  ) {
     this.name = name;
     this.topics = topic;
+    this.defaultScript = defaultScript;
+    this.disabled = disabled;
   }
 }
 
@@ -14,19 +23,22 @@ export class Topic {
   difficulty: TopicDifficulty;
   description: string[];
   questions: Question[];
+  disabled: boolean;
 
   constructor(
     id: string,
     name: string,
     difficulty: number,
     description: string[],
-    questions: Question[]
+    questions: Question[],
+    disabled: boolean = false
   ) {
     this.id = id;
     this.name = name;
     this.difficulty = difficulty;
     this.description = description;
     this.questions = questions;
+    this.disabled = disabled;
   }
 }
 
@@ -44,6 +56,8 @@ export class Question {
   defaultFunctionWithParameters: string;
   defaultTestCase: any;
   fiveTestCases: any[];
+  examples: TestCase[];
+  executionScript: string;
   userScript: string | null;
 
   constructor(
@@ -54,6 +68,8 @@ export class Question {
     defaultFunctionWithParameters: string,
     defaultTestCase: TestCase,
     fiveTestCases: TestCase[],
+    examples: TestCase[],
+    executionScript: string,
     userScript: string | null = null
   ) {
     this.id = id;
@@ -63,6 +79,8 @@ export class Question {
     this.defaultFunctionWithParameters = defaultFunctionWithParameters;
     this.defaultTestCase = defaultTestCase;
     this.fiveTestCases = fiveTestCases;
+    this.examples = examples;
+    this.executionScript = executionScript;
     this.userScript = userScript;
   }
 }
@@ -70,18 +88,24 @@ export class Question {
 export class TestCase {
   parameter: any;
   outcome: any;
+  explaination: string | undefined;
 
-  constructor(parameter: any, outcome: any) {
+  constructor(
+    parameter: any,
+    outcome: any,
+    explaination: string | undefined = undefined
+  ) {
     this.parameter = parameter;
     this.outcome = outcome;
+    this.explaination = explaination;
   }
 }
 
 export class ExecuteScript {
-  script: string | null;
+  script: string | undefined;
   question: Question;
 
-  constructor(script: string | null, question: Question) {
+  constructor(script: string | undefined, question: Question) {
     this.script = script;
     this.question = question;
   }

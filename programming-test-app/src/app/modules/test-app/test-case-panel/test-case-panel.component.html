@@ -9,7 +9,7 @@
     <div class="input-output-label">Expected Output</div>
     <div class="code-container">{{currentQuestion?.defaultTestCase.outcome}}</div>
     <div class="input-output-label">Your Output</div>
-    <div class="code-container output-container mb-3">{{testResponse$?.output}}</div>
+    <div class="code-container output-container mb-3" [innerHTML]="addLineBreaksToOutput(testResponse$.output)"></div>
 </div>
 
 <div class="test-case-container mt-4 p-3" *ngIf="showTestCasePanel && testResponse$ == null">

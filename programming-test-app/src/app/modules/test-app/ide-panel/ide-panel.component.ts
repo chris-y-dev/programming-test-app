@@ -12,9 +12,8 @@ import { RxStomp } from '@stomp/rx-stomp'; //Testing as an alternative to websoc
 import { enableTabToIndent } from 'indent-textarea';
 import { JdoodleService } from '../../shared/services/jdoodle.service';
 import { Observable, Subscription } from 'rxjs';
-import { ExecuteScript, Question } from '../../shared/models/models';
+import { ExecuteScript, Language, Question } from '../../shared/models/models';
 import { TimerComponent } from '../timer/timer.component';
-import { EventEmitterService } from '../../shared/services/event-emitter.service';
 import { Router } from '@angular/router';
 
 //For WebsocketAPI
@@ -33,6 +32,7 @@ export class IdePanelComponent implements OnInit, OnChanges {
   @Input() currentToken: string | null = null;
   @Input() currentProgress: number = 1;
   @Input() isTimed: boolean | null = null;
+  @Input() selectedLanguage: Language | null = null;
   @Output() emitNextQuestion: EventEmitter<number> = new EventEmitter();
   @Output() emitScriptsForExecution: EventEmitter<ExecuteScript[]> =
     new EventEmitter();
@@ -48,6 +48,8 @@ export class IdePanelComponent implements OnInit, OnChanges {
   constructor(private jdoodleService: JdoodleService, private router: Router) {}
 
   ngOnInit(): void {
+    this.renderDefaultScriptInIDE();
+
     this.loadScript(
       'https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js'
     );
@@ -72,9 +74,9 @@ export class IdePanelComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('Changes');
-    changes['testResponse$'];
-    console.log(changes);
+    if (changes['currentQuestion'] != undefined) {
+      this.renderDefaultScriptInIDE();
+    }
   }
 
   // onWsConnection() {
@@ -174,43 +176,52 @@ export class IdePanelComponent implements OnInit, OnChanges {
     // });
   }
 
+  renderDefaultScriptInIDE() {
+    var textArea = document.getElementById('ide') as HTMLInputElement;
+
+    var defaultFuncName = this.currentQuestion?.defaultFunctionWithParameters;
+
+    var defaultScript = this.selectedLanguage?.defaultScript;
+
+    var script = `function ${defaultFuncName}${defaultScript}`;
+
+    console.log(script);
+
+    textArea.value = script;
+  }
+
   handleTest() {
     // console.log(this.codeInput);
     this.showTestCasePanel = true;
 
-    var textArea = document.getElementById('ide') as HTMLInputElement;
-    console.log(textArea.value);
+    const finalScript: string | undefined =
+      this.generateFullScriptForExecution();
 
-    const script = textArea.value;
-
-    // this.socketClient.send('/app/execute-ws-api-token', this.codeInput, {
-    //   message_type: 'input',
-    // });
-
-    this.jdoodleService.postScriptForExecution(script).subscribe((res) => {
-      // console.log(res);
-      this.testResponse$ = res;
+    this.socketClient.send('/app/execute-ws-api-token', this.codeInput, {
+      message_type: 'input',
     });
+
+    this.jdoodleService
+      .postScriptForExecution(
+        finalScript,
+        this.currentQuestion?.defaultTestCase.parameter
+      )
+      .subscribe((res) => {
+        console.log(res);
+        this.testResponse$ = res;
+      });
   }
 
   handleNext() {
     //TODO: Store code for later processing
-    var textArea = document.getElementById('ide') as HTMLInputElement;
+    const finalScript: string | undefined =
+      this.generateFullScriptForExecution();
 
     this.finishedScripts.push(
-      new ExecuteScript(textArea.value, this.currentQuestion!)
+      new ExecuteScript(finalScript, this.currentQuestion!)
     );
 
-    //Clean up current page
-    var textArea = document.getElementById('ide') as HTMLInputElement;
-    if (textArea != null) {
-      textArea.value = '';
-    }
-    this.testResponse$ = null;
-    this.showTestCasePanel = false;
-
     //Next step
-
     if (this.currentProgress == 5) {
       this.emitScriptsForExecution.emit(this.finishedScripts);
     } else {
@@ -221,6 +232,27 @@ export class IdePanelComponent implements OnInit, OnChanges {
         this.timer.startTimer();
       }
     }
+
+    //Clean up current page
+
+    // if (textArea != null) {
+    //   textArea.value = '';
+    // }
+
+    this.testResponse$ = null;
+    this.showTestCasePanel = false;
+  }
+
+  generateFullScriptForExecution(): string | undefined {
+    var textArea = document.getElementById('ide') as HTMLInputElement;
+    console.log(textArea.value);
+
+    const userInput = textArea.value;
+
+    var script = this.currentQuestion?.executionScript;
+    var finalScript = script?.replace('//USERINPUT', userInput);
+
+    return finalScript;
   }
 
   getNextButtonText() {
